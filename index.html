@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portal Seminar Kampus - Modern</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="logo" onclick="navigate('home')">🎓 CampusEvents</div>
+        <nav>
+            <ul>
+                <li><a onclick="navigate('home')">Home</a></li>
+                <li><a onclick="navigate('list')">Daftar Seminar</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="page-home">
+            <div class="hero">
+                <h1>Tingkatkan Skillmu Lewat Seminar Kampus</h1>
+                <p>Temukan berbagai seminar menarik dari pakar industri dan akademisi.</p>
+                <button class="btn btn-hero" onclick="navigate('list')">Lihat Jadwal Seminar</button>
+            </div>
+            
+            <h2 class="section-title">Seminar Mendatang</h2>
+            <div class="grid" id="preview-grid"></div>
+        </section>
+
+        <section id="page-list" class="hidden">
+            <h2 class="section-title">Semua Seminar</h2>
+            <div class="filter-bar">
+                <select id="category-filter" onchange="filterSeminars()">
+                    <option value="All">Semua Kategori</option>
+                    <option value="Teknologi">Teknologi</option>
+                    <option value="Bisnis">Bisnis</option>
+                    <option value="Pengembangan Diri">Pengembangan Diri</option>
+                </select>
+            </div>
+            <div class="grid" id="seminar-grid"></div>
+        </section>
+
+        <section id="page-detail" class="hidden">
+            <button class="btn btn-outline" style="margin-bottom: 1.5rem;" onclick="navigate('list')">
+                ⬅ Kembali
+            </button>
+            <div class="detail-container" id="detail-content"></div>
+        </section>
+
+        <section id="page-confirmation" class="hidden">
+            <div class="ticket" id="ticket-content"></div>
+            <div style="text-align: center; margin-top: 1.5rem;">
+                <button class="btn btn-primary" onclick="navigate('home')">Kembali ke Beranda</button>
+            </div>
+        </section>
+    </main>
+
+    <div id="registration-modal" class="modal-overlay hidden">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal()">×</span>
+            <h3>Form Pendaftaran</h3>
+            <p id="modal-seminar-title" class="modal-subtitle"></p>
+
+            <form id="reg-form" onsubmit="handleRegistration(event)" novalidate>
+                <input type="hidden" id="reg-seminar-id">
+                
+                <div class="form-group">
+                    <label for="reg-nama">Nama Lengkap</label>
+                    <input type="text" id="reg-nama" placeholder="Contoh: Ilham Nugroho">
+                    <div class="error-text" id="err-nama"></div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="reg-nim">NIM</label>
+                    <input type="text" id="reg-nim" placeholder="Contoh: 250103122">
+                    <div class="error-text" id="err-nim"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="reg-email">Email</label>
+                    <input type="email" id="reg-email" placeholder="contoh@email.com">
+                    <div class="error-text" id="err-email"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="reg-prodi">Program Studi</label>
+                    <select id="reg-prodi">
+                        <option value="" disabled selected>Pilih Program Studi...</option>
+                        <option value="Teknik Informatika">Teknik Informatika</option>
+                        <option value="Sistem Informasi">Sistem Informasi</option>
+                        <option value="Teknik Komputer">Teknik Komputer</option>
+                        <option value="Teknik Rekayasa Perangkat Lunak">Teknik Rekayasa Perangkat Lunak</option>
+                    </select>
+                    <div class="error-text" id="err-prodi"></div>
+                </div>
+                
+                <div class="form-group">
+                    <label>Jenis Kelamin</label>
+                    <div class="radio-group">
+                        <label class="radio-label">
+                            <input type="radio" name="reg-jk" value="Laki-laki"> Laki-laki
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" name="reg-jk" value="Perempuan"> Perempuan
+                        </label>
+                    </div>
+                    <div class="error-text" id="err-jk"></div>
+                </div>
+                
+                <button type="submit" class="btn btn-success full-width">Tombol Submit</button>
+            </form>
+        </div>
+    </div>
+
+    <footer>
+        <p>© 2026 CampusEvents.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
